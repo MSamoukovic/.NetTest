@@ -35,7 +35,6 @@ namespace Test.Controllers
         }
 
         // POST api/students
-        [Route("api/init-data-entery")]
         public void Post([FromBody] StudentDTO studentDTO)
         {
             student.CreateStudent(studentDTO);

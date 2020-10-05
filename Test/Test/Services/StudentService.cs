@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Web;
@@ -39,18 +40,24 @@ namespace Test.Services
 
         public List<Student> GetAllStudents()
         {
-            List<Student> allStudents = new List<Student>();
-            foreach (var student in Context.Students)
-            {
-                allStudents.Add(student);
-            }
-            return allStudents;
+            //List<Student> allStudents = new List<Student>();
+            //foreach (var student in Context.Students)
+            //{
+            //    allStudents.Add(student);
+            //}
+            //return allStudents;
+            return Context.Database.SqlQuery<Student>("GetStudents").ToList();
         }
 
         public Student GetStudentById(int id)
         {
-            var student = Context.Students.Find(id);
-            return student;
+            //var student = Context.Students.Find(id);
+            //return student;
+            var studentIdParameter = new SqlParameter("@Id", id);
+            var result = Context.Database
+                .SqlQuery<Student>("GetById @Id", studentIdParameter)
+                .ToList().FirstOrDefault();
+            return result;
         }
 
         public void UpdateStudent(int id, StudentDTO studentDTO)
