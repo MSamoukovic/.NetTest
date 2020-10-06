@@ -10,7 +10,7 @@ namespace Test.Services.Interface
 {
     interface IStudentService
     {
-        List<Student> GetAllStudents();
+        List<StudentDTO> GetAllStudents();
         Student GetStudentById(int id);
         void DeleteStudent(int id);
         void CreateStudent(StudentDTO studentDTO);

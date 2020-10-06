@@ -16,7 +16,7 @@ namespace Test.Controllers
         StudentService student = new StudentService(new TestContext());
 
         // GET api/students
-        public IEnumerable<Student> Get()
+        public IEnumerable<StudentDTO> Get()
         {
             var allStudents = student.GetAllStudents();
             return allStudents;

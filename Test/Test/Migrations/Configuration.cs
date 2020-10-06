@@ -27,6 +27,8 @@ namespace Test.Migrations
              new Student { Id = 1, StudentIdCard="MR12/15", FirstName = "Maja", LastName="Samoukovic", Year=4, StudentStatusId=2 },
              new Student { Id = 2, StudentIdCard = "MR14/15", FirstName = "Vanja", LastName = "Samoukovic", Year = 1, StudentStatusId = 1 }
            );
+
+           
         }
     }
 }

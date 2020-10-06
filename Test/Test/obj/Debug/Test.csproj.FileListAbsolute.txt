@@ -475,3 +475,5 @@ C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.csproj.CoreCo
 C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.csproj.CopyComplete
 C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.dll
 C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.pdb
+C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.Migrations.AddedTableCourses.resources
+C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.Migrations.AddedTableStudentCourse.resources

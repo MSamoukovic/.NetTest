@@ -25,7 +25,10 @@ namespace Test.Services
             student.FirstName = studentDTO.FirstName;
             student.LastName = studentDTO.LastName;
             student.Year = studentDTO.Year;
-            student.StudentStatusId = 1;
+
+            var statusId = Context.StudentStatus.Where(s => s.Name == studentDTO.StudentStatus).FirstOrDefault().Id;
+
+            student.StudentStatusId = statusId;
 
             Context.Students.Add(student);
             Context.SaveChanges();
@@ -38,15 +41,23 @@ namespace Test.Services
             Context.SaveChanges();
         }
 
-        public List<Student> GetAllStudents()
+        public List<StudentDTO> GetAllStudents()
         {
-            //List<Student> allStudents = new List<Student>();
-            //foreach (var student in Context.Students)
-            //{
-            //    allStudents.Add(student);
-            //}
-            //return allStudents;
-            return Context.Database.SqlQuery<Student>("GetStudents").ToList();
+            //return Context.Database.SqlQuery<Student>("GetStudents").ToList();
+            List<StudentDTO> allStudents = new List<StudentDTO>();
+            foreach (var student in Context.Students)
+            {
+                StudentDTO stud = new StudentDTO();
+                stud.Id = student.Id;
+                stud.FirstName = student.FirstName;
+                stud.LastName = student.LastName;
+                stud.Year = student.Year;
+                stud.StudentIdCard = student.StudentIdCard;
+                var statusName = Context.StudentStatus.Where(s => s.Id == student.StudentStatusId).FirstOrDefault().Name;
+                stud.StudentStatus = statusName;
+                allStudents.Add(stud);
+            }
+            return allStudents;
         }
 
         public Student GetStudentById(int id)
