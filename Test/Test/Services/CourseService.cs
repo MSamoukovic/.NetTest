@@ -19,5 +19,10 @@ namespace Test.Services
             return Context.Courses.ToList();
         }
 
+        public void CreateCourse(Course course)
+        {
+            Context.Courses.Add(course);
+            Context.SaveChanges();
+        }
     }
 }

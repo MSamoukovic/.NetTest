@@ -20,16 +20,7 @@ namespace Test.Services
 
         public void CreateStudent(StudentDTO studentDTO)
         {
-            Student student = new Student();
-            student.StudentIdCard = studentDTO.StudentIdCard;
-            student.FirstName = studentDTO.FirstName;
-            student.LastName = studentDTO.LastName;
-            student.Year = studentDTO.Year;
-
-            var statusId = Context.StudentStatus.Where(s => s.Name == studentDTO.StudentStatus).FirstOrDefault().Id;
-
-            student.StudentStatusId = statusId;
-
+            Student student = ConvertDTOToStudent(studentDTO);
             Context.Students.Add(student);
             Context.SaveChanges();
         }
@@ -43,19 +34,12 @@ namespace Test.Services
 
         public List<StudentDTO> GetAllStudents()
         {
-            //return Context.Database.SqlQuery<Student>("GetStudents").ToList();
             List<StudentDTO> allStudents = new List<StudentDTO>();
-            foreach (var student in Context.Students)
+            var storeProcedure = Context.Database.SqlQuery<Student>("GetStudents").ToList();
+            foreach (var student in storeProcedure)
             {
-                StudentDTO stud = new StudentDTO();
-                stud.Id = student.Id;
-                stud.FirstName = student.FirstName;
-                stud.LastName = student.LastName;
-                stud.Year = student.Year;
-                stud.StudentIdCard = student.StudentIdCard;
-                var statusName = Context.StudentStatus.Where(s => s.Id == student.StudentStatusId).FirstOrDefault().Name;
-                stud.StudentStatus = statusName;
-                allStudents.Add(stud);
+                StudentDTO studentDTO = ConvertStudentToDTO(student);
+                allStudents.Add(studentDTO);
             }
             return allStudents;
         }
@@ -80,7 +64,51 @@ namespace Test.Services
             student.LastName = updatedStudent.LastName;
             student.Year = updatedStudent.Year;
             student.StudentIdCard = updatedStudent.StudentIdCard;
+            student.StudentStatusId = updatedStudent.StudentStatusId;
             Context.SaveChanges();
+        }
+
+        public Student ConvertDTOToStudent(StudentDTO studentDTO)
+        {
+            Student student = new Student();
+            student.StudentIdCard = studentDTO.StudentIdCard;
+            student.FirstName = studentDTO.FirstName;
+            student.LastName = studentDTO.LastName;
+            student.Year = studentDTO.Year;
+
+            var statusId = Context.StudentStatus.Where(s => s.Name == studentDTO.StudentStatus).FirstOrDefault().Id;
+            student.StudentStatusId = statusId;
+            return student;
+        }
+
+        public StudentDTO ConvertStudentToDTO(Student student)
+        {
+            StudentDTO studentDTO = new StudentDTO();
+            studentDTO.Id = student.Id;
+            studentDTO.FirstName = student.FirstName;
+            studentDTO.LastName = student.LastName;
+            studentDTO.Year = student.Year;
+            studentDTO.StudentIdCard = student.StudentIdCard;
+            var statusName = Context.StudentStatus.Where(s => s.Id == student.StudentStatusId).FirstOrDefault().Name;
+            studentDTO.StudentStatus = statusName;
+
+            var courses = GetStudentsCourses(student);
+            studentDTO.CoursesList = courses;
+
+            return studentDTO;
+        }
+
+        public List<string> GetStudentsCourses(Student student)
+        {
+            var coursesList = Context.StudentCourses.Where(s => s.StudentId == student.Id).ToList();
+            var courses = new List<string>();
+            foreach (var course in coursesList)
+            {
+                var courseId = course.CourseId;
+                var courseName = Context.Courses.Where(c => c.Id == courseId).FirstOrDefault().Name;
+                courses.Add(courseName);
+            }
+            return courses;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Test.Controllers
         {
             return student.GetStudentById(id);
         }
-        
+
         // DELETE api/students/5
         public void Delete(int id)
         {

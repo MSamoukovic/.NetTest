@@ -10,5 +10,6 @@ namespace Test.Services.Interface
     interface ICourseService
     {
         List<Course> GetAllCourses();
+        void CreateCourse(Course course);
     }
 }

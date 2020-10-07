@@ -18,27 +18,18 @@ namespace Test.Controllers
     {
         CourseService courses = new CourseService(new TestContext());
 
-        //GET: api/Courses
+        //GET: api/courses
         public List<Course> GetCourses()
         {
             return courses.GetAllCourses();
         }
 
-        //// POST: api/Courses
-        //[ResponseType(typeof(Course))]
-        //public IHttpActionResult PostCourse(Course course)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.Courses.Add(course);
-        //    db.SaveChanges();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = course.Id }, course);
-        //}
 
 
+        // POST api/courses
+        public void Post([FromBody] Course course)
+        {
+            courses.CreateCourse(course);
+        }
     }
 }

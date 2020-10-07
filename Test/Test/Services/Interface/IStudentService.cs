@@ -15,5 +15,8 @@ namespace Test.Services.Interface
         void DeleteStudent(int id);
         void CreateStudent(StudentDTO studentDTO);
         void UpdateStudent(int id, StudentDTO studentDTO);
+        StudentDTO ConvertStudentToDTO(Student student);
+        Student ConvertDTOToStudent(StudentDTO studentDTO);
+        List<string> GetStudentsCourses(Student student);
     }
 }

@@ -171,7 +171,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\StudentStatusController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\Models\Course.cs" />
     <Compile Include="Data\Models\Student.cs" />
     <Compile Include="Data\Models\StudentCourse.cs" />
@@ -204,6 +203,10 @@
     <Compile Include="Migrations\202010061824158_AddedTableStudentCourse.cs" />
     <Compile Include="Migrations\202010061824158_AddedTableStudentCourse.Designer.cs">
       <DependentUpon>202010061824158_AddedTableStudentCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010071003171_ChangedTableName.cs" />
+    <Compile Include="Migrations\202010071003171_ChangedTableName.Designer.cs">
+      <DependentUpon>202010071003171_ChangedTableName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StudentDTO.cs" />
@@ -317,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010061824158_AddedTableStudentCourse.resx">
       <DependentUpon>202010061824158_AddedTableStudentCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010071003171_ChangedTableName.resx">
+      <DependentUpon>202010071003171_ChangedTableName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
