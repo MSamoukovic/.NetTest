@@ -11,5 +11,6 @@ namespace Test.Services.Interface
     {
         List<Course> GetAllCourses();
         void CreateCourse(Course course);
+        List<Student> GetStudentsByCourseId(int courseId);
     }
 }

@@ -22,7 +22,15 @@ namespace Test.Services
         {
             Student student = ConvertDTOToStudent(studentDTO);
             Context.Students.Add(student);
-            Context.SaveChanges();
+            Context.SaveChanges(); 
+
+            //var courseId = Context.Courses.Where(c=>c.Name == studentDTO.CoursesList[0].
+
+            //StudentCourse studentCourse = new StudentCourse();
+            //studentCourse.StudentId = student.Id;
+            //studentCourse.CourseId = courseId;
+            //Context.StudentCourses.Add(studentCourse);
+            //Context.SaveChanges();
         }
 
         public void DeleteStudent(int id)

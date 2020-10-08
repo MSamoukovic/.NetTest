@@ -24,5 +24,27 @@ namespace Test.Services
             Context.Courses.Add(course);
             Context.SaveChanges();
         }
+
+        public List<Student> GetStudentsByCourseId(int courseId)
+        {
+            var studentCourses = Context.StudentCourses.Where(c => c.CourseId == courseId).ToList();
+            var ids = new List<int>();
+
+            foreach(var i in studentCourses)
+            {
+                ids.Add(i.StudentId);
+
+            }
+
+            var students = new List<Student>();
+
+            foreach (var id in ids)
+            {
+                var student = Context.Students.Where(s => s.Id == id).FirstOrDefault();
+                students.Add(student);
+            }
+
+            return students;
+        }
     }
 }

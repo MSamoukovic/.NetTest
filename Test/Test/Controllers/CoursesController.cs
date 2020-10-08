@@ -24,6 +24,11 @@ namespace Test.Controllers
             return courses.GetAllCourses();
         }
 
+        // GET api/students/5
+        public List<Student> Get(int id)
+        {
+            return courses.GetStudentsByCourseId(id);
+        }
 
 
         // POST api/courses
