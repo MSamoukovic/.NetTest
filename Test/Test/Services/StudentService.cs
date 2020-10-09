@@ -22,15 +22,9 @@ namespace Test.Services
         {
             Student student = ConvertDTOToStudent(studentDTO);
             Context.Students.Add(student);
-            Context.SaveChanges(); 
+            Context.SaveChanges();
 
-            //var courseId = Context.Courses.Where(c=>c.Name == studentDTO.CoursesList[0].
-
-            //StudentCourse studentCourse = new StudentCourse();
-            //studentCourse.StudentId = student.Id;
-            //studentCourse.CourseId = courseId;
-            //Context.StudentCourses.Add(studentCourse);
-            //Context.SaveChanges();
+            AddCoursesOfStudent(student.Id, studentDTO.CoursesList);           
         }
 
         public void DeleteStudent(int id)
@@ -38,6 +32,13 @@ namespace Test.Services
             var student = Context.Students.Where(s => s.Id == id).FirstOrDefault();
             Context.Students.Remove(student);
             Context.SaveChanges();
+
+            var coursesOdStudent = Context.StudentCourses.Where(s => s.StudentId == id).ToList();
+            foreach(var courseOfStudent in coursesOdStudent)
+            {
+                Context.StudentCourses.Remove(courseOfStudent);
+                Context.SaveChanges();
+            }
         }
 
         public List<StudentDTO> GetAllStudents()
@@ -117,6 +118,19 @@ namespace Test.Services
                 courses.Add(courseName);
             }
             return courses;
+        }
+
+        public void AddCoursesOfStudent(int studentId, List<string> coursesNames)
+        {
+            foreach (var courseName in coursesNames)
+            {
+                var courseId = Context.Courses.Where(c => c.Name == courseName).FirstOrDefault().Id;
+                StudentCourse studentCourse = new StudentCourse();
+                studentCourse.StudentId = studentId;
+                studentCourse.CourseId = courseId;
+                Context.StudentCourses.Add(studentCourse);
+                Context.SaveChanges();
+            }
         }
     }
 }

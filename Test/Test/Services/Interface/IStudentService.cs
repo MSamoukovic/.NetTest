@@ -18,5 +18,6 @@ namespace Test.Services.Interface
         StudentDTO ConvertStudentToDTO(Student student);
         Student ConvertDTOToStudent(StudentDTO studentDTO);
         List<string> GetStudentsCourses(Student student);
+        void AddCoursesOfStudent(int studentId, List<string> coursesNames);
     }
 }
