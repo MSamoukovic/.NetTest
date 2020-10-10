@@ -35,9 +35,9 @@ namespace Test.Migrations
              new Course { Id = 3, Name = "Njemaèki" }
            );
 
-            context.StudentCourses.AddOrUpdate(
+            context.CoursesOfStudents.AddOrUpdate(
              t => t.Id,
-             new StudentCourse { Id = 1, StudentId = 1, CourseId=1 },
+             new StudentCourse { Id = 1, StudentId = 1, CourseId= 1 },
              new StudentCourse { Id = 2, StudentId = 1, CourseId = 2 },
              new StudentCourse { Id = 3, StudentId = 2, CourseId = 1 }
            );

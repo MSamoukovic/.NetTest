@@ -33,10 +33,10 @@ namespace Test.Services
             Context.Students.Remove(student);
             Context.SaveChanges();
 
-            var coursesOdStudent = Context.StudentCourses.Where(s => s.StudentId == id).ToList();
+            var coursesOdStudent = Context.CoursesOfStudents.Where(s => s.StudentId == id).ToList();
             foreach(var courseOfStudent in coursesOdStudent)
             {
-                Context.StudentCourses.Remove(courseOfStudent);
+                Context.CoursesOfStudents.Remove(courseOfStudent);
                 Context.SaveChanges();
             }
         }
@@ -109,7 +109,7 @@ namespace Test.Services
 
         public List<string> GetStudentsCourses(Student student)
         {
-            var coursesList = Context.StudentCourses.Where(s => s.StudentId == student.Id).ToList();
+            var coursesList = Context.CoursesOfStudents.Where(s => s.StudentId == student.Id).ToList();
             var courses = new List<string>();
             foreach (var course in coursesList)
             {
@@ -128,7 +128,7 @@ namespace Test.Services
                 StudentCourse studentCourse = new StudentCourse();
                 studentCourse.StudentId = studentId;
                 studentCourse.CourseId = courseId;
-                Context.StudentCourses.Add(studentCourse);
+                Context.CoursesOfStudents.Add(studentCourse);
                 Context.SaveChanges();
             }
         }

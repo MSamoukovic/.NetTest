@@ -16,25 +16,24 @@ namespace Test.Controllers
 {
     public class CoursesController : ApiController
     {
-        CourseService courses = new CourseService(new TestContext());
+        CourseService course = new CourseService(new TestContext());
 
         //GET: api/courses
         public List<Course> GetCourses()
         {
-            return courses.GetAllCourses();
+            return course.GetAllCourses();
         }
 
-        // GET api/students/5
+        // GET api/courses/5
         public List<Student> Get(int id)
         {
-            return courses.GetStudentsByCourseId(id);
+            return course.GetStudentsByCourseId(id);
         }
 
-
         // POST api/courses
-        public void Post([FromBody] Course course)
+        public void Post([FromBody] Course c)
         {
-            courses.CreateCourse(course);
+            course.CreateCourse(c);
         }
     }
 }

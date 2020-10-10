@@ -14,6 +14,7 @@ namespace Test.Services
         public CourseService(TestContext context) : base(context)
         {
         }
+
         public List<Course> GetAllCourses()
         {
             return Context.Courses.ToList();
@@ -27,23 +28,14 @@ namespace Test.Services
 
         public List<Student> GetStudentsByCourseId(int courseId)
         {
-            var studentCourses = Context.StudentCourses.Where(c => c.CourseId == courseId).ToList();
-            var ids = new List<int>();
-
-            foreach(var i in studentCourses)
-            {
-                ids.Add(i.StudentId);
-
-            }
-
+            var studentCoursesRows = Context.CoursesOfStudents.Where(c => c.CourseId == courseId).ToList();
             var students = new List<Student>();
 
-            foreach (var id in ids)
+            foreach(var row in studentCoursesRows)
             {
-                var student = Context.Students.Where(s => s.Id == id).FirstOrDefault();
+                var student = Context.Students.Where(s => s.Id == row.StudentId).FirstOrDefault();
                 students.Add(student);
             }
-
             return students;
         }
     }

@@ -208,6 +208,10 @@
     <Compile Include="Migrations\202010071003171_ChangedTableName.Designer.cs">
       <DependentUpon>202010071003171_ChangedTableName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010101727101_ChangedTableName1.cs" />
+    <Compile Include="Migrations\202010101727101_ChangedTableName1.Designer.cs">
+      <DependentUpon>202010101727101_ChangedTableName1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StudentDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -323,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010071003171_ChangedTableName.resx">
       <DependentUpon>202010071003171_ChangedTableName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010101727101_ChangedTableName1.resx">
+      <DependentUpon>202010101727101_ChangedTableName1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

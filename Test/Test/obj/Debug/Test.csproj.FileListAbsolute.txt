@@ -478,3 +478,4 @@ C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.pdb
 C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.Migrations.AddedTableCourses.resources
 C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.Migrations.AddedTableStudentCourse.resources
 C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.Migrations.ChangedTableName.resources
+C:\Users\MAJA\Desktop\New folder\.NetTest\Test\Test\obj\Debug\Test.Migrations.ChangedTableName1.resources
