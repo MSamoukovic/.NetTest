@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Web;
 using Test.Data;
@@ -53,28 +54,45 @@ namespace Test.Services
             return allStudents;
         }
 
-        public Student GetStudentById(int id)
+        public StudentDTO GetStudentById(int id)
         {
             //var student = Context.Students.Find(id);
             //return student;
             var studentIdParameter = new SqlParameter("@Id", id);
-            var result = Context.Database
+            var student = Context.Database
                 .SqlQuery<Student>("GetById @Id", studentIdParameter)
                 .ToList().FirstOrDefault();
-            return result;
+            var studentDTO = ConvertStudentToDTO(student);
+            return studentDTO;
+
         }
 
         public void UpdateStudent(int id, StudentDTO studentDTO)
         {
             Student student = Context.Students.Find(id);
-            var updatedStudent  = StudentHelper.UpdatedNonNullFields(student, studentDTO);
 
-            student.FirstName = updatedStudent.FirstName;
-            student.LastName = updatedStudent.LastName;
-            student.Year = updatedStudent.Year;
-            student.StudentIdCard = updatedStudent.StudentIdCard;
-            student.StudentStatusId = updatedStudent.StudentStatusId;
-            Context.SaveChanges();
+            student.FirstName = studentDTO.FirstName;
+            student.LastName = studentDTO.LastName;
+            student.Year = studentDTO.Year;
+            student.StudentIdCard = studentDTO.StudentIdCard;
+            var statusId = Context.StudentStatus.Where(s => s.Name == studentDTO.StudentStatus).FirstOrDefault().Id;
+            student.StudentStatusId = statusId;
+
+            var coursesOfStudent = Context.CoursesOfStudents.Where(s => s.StudentId == student.Id).ToList();
+            foreach (var course in coursesOfStudent)
+            {
+                Context.CoursesOfStudents.Remove(course);
+            }
+
+            foreach (var course in studentDTO.CoursesList)
+            {
+                var courseId = Context.Courses.Where(c => c.Name == course).FirstOrDefault().Id;
+                StudentCourse courseOfStudent = new StudentCourse();
+                courseOfStudent.CourseId = courseId;
+                courseOfStudent.StudentId = student.Id;
+                Context.CoursesOfStudents.Add(courseOfStudent);
+                Context.SaveChanges();
+            }
         }
 
         public Student ConvertDTOToStudent(StudentDTO studentDTO)

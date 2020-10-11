@@ -23,7 +23,7 @@ namespace Test.Controllers
         }
 
         // GET api/students/5
-        public Student Get(int id)
+        public StudentDTO Get(int id)
         {
             return student.GetStudentById(id);
         }

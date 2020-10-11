@@ -11,7 +11,7 @@ namespace Test.Services.Interface
     interface IStudentService
     {
         List<StudentDTO> GetAllStudents();
-        Student GetStudentById(int id);
+        StudentDTO GetStudentById(int id);
         void DeleteStudent(int id);
         void CreateStudent(StudentDTO studentDTO);
         void UpdateStudent(int id, StudentDTO studentDTO);
