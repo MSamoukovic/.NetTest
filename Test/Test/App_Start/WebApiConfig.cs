@@ -16,7 +16,7 @@ namespace Test
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            var cors = new EnableCorsAttribute("http://localhost:8082", "*", "*");
+            var cors = new EnableCorsAttribute("http://localhost:8080", "*", "*");
             config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(
